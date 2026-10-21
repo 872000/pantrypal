@@ -71,6 +71,10 @@ public struct PantryItem: Identifiable, Codable, Hashable, Sendable {
         return calendar.dateComponents([.day], from: startNow, to: startExpiry).day
     }
 
+    /// Freshness of an item relative to a reference date.
+    ///
+    /// Day 0 (expiring today) counts as expiring soon, not expired; an item is
+    /// only expired once its expiry day has fully passed.
     public func status(
         asOf now: Date,
         soonThresholdDays: Int = 3,
